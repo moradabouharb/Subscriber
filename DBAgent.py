@@ -30,13 +30,11 @@ def Data_Handler_Worksession(Data):
     RFID_value = JsonDictionary['v']
     dbObj = DatabaseManager()
     dbObj.cur.execute("select rfid FROM worksession order by sessionid DESC limit 1")
-    rows = dbObj.cur.fetchall()
-    if(RFID_value != rows):
-        dbObj.add_del_update_db_record("insert into WorkSession(RFID) VALUES (%s)", [RFID_value])
-        del dbObj
-
-    del dbObj
-
+    rows = dbObj.cur.fetchone()
+    for r in rows:
+        if(RFID_value != r):
+            dbObj.add_del_update_db_record("insert into WorkSession(RFID) VALUES (%s)", [RFID_value])
+            del dbObj
 
 def Data_Handler_Enviroment(Data):
     JsonDictionary = json.loads(Data)
