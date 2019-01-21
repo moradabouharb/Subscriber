@@ -63,10 +63,11 @@ def Data_Handler_Product(Data):
 def Data_Handler(Topic, jsonData):
    if(Topic == WorkSession_topic):
        Data_Handler_Worksession(jsonData)
+   elif (Topic == Product_topic):
+       Data_Handler_Product(jsonData)
    elif(Topic == Lum_topic or Topic == Hum_topic or Temp_topic):
        Data_Handler_Enviroment(jsonData)
-   elif(Topic == Product_topic):
-       Data_Handler_Product(jsonData)
+
 
 
 mqttc = mqtt.Client()
